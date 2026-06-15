@@ -1,0 +1,6 @@
+url_content.txt
+url_content_utf8.txt
+*.log
+.gemini/
+.idea/
+.vscode/

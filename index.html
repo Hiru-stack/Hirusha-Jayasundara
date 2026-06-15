@@ -1,1078 +1,1106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Hirusha Jayasundara – AI & Data Science</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<style>
-  :root {
-    --bg: #0a0a12;
-    --bg2: #10101e;
-    --bg3: #16162a;
-    --card: #1a1a2e;
-    --card2: #1f1f38;
-    --accent: #7c6af7;
-    --accent2: #a78bfa;
-    --teal: #2dd4bf;
-    --pink: #f472b6;
-    --text: #e8e6ff;
-    --muted: #8b89b0;
-    --border: rgba(124,106,247,0.18);
-    --border2: rgba(124,106,247,0.35);
-    --glow: 0 0 40px rgba(124,106,247,0.12);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-    line-height: 1.7;
-  }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 4rem;
-    background: rgba(10,10,18,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 0.5px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 1.2rem;
-    background: linear-gradient(135deg, var(--accent2), var(--teal));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    color: var(--muted); text-decoration: none; font-size: 0.88rem;
-    font-weight: 500; letter-spacing: 0.03em;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent2); }
-
-  /* SECTIONS */
-  section { padding: 6rem 4rem; max-width: 1100px; margin: 0 auto; }
-
-  /* GLOBAL CONTAINER */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* STANDARD SECTION SPACING */
-section {
-  padding-top: 80px;
-  padding-bottom: 80px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-/* HERO WRAPPER CONTAINER */
-.hero-wrapper {
-  width: 100%;
-}
-
-/* Ensure hero content stays within container */
-.hero-wrapper > .hero-3col {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* MOBILE STACKING ORDER: Image on top */
-@media (max-width: 900px) {
-  .hero-center {
-    order: -1; /* bring portrait to top */
-  }
-}
-
-  /* HERO – 3-column glowing layout */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6rem 0 4rem; /* container handles horizontal padding */
-    position: relative;
-    overflow: hidden;
-    background: var(--bg);
-    /* subtle dark overlay */
-    box-shadow: inset 0 0 120px rgba(0,0,0,0.4);
-    
-    /* OVERRIDE default section constraints so hero spans full screen */
-    max-width: 100%;
-    margin: 0;
-  }
-
-  /* Glowing background blobs */
-  .hero-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .hero-glow-l {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(124,106,247,0.35) 0%, transparent 70%);
-    top: 10%; left: -8%;
-  }
-  .hero-glow-r {
-    width: 420px; height: 420px;
-    background: radial-gradient(circle, rgba(45,212,191,0.18) 0%, transparent 70%);
-    bottom: 5%; right: -5%;
-  }
-
-  /* 2-column grid */
-  .hero-2col {
-    position: relative; z-index: 1;
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: center;
-    gap: 4rem;
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  /* LEFT: Content */
-  .hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .hero-label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 1rem;
-    background: rgba(45,212,191,0.1);
-    padding: 0.4rem 1rem;
-    border-radius: 100px;
-    border: 1px solid rgba(45,212,191,0.25);
-  }
-  .hero-name {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    font-weight: 800;
-    line-height: 1.05;
-    color: #fff;
-    text-shadow: 0 4px 12px rgba(0,0,0,0.8);
-    margin-bottom: 1.2rem;
-    white-space: nowrap;
-  }
-  .hero-desc {
-    font-size: 1.05rem;
-    color: var(--muted);
-    line-height: 1.8;
-    margin-bottom: 2.5rem;
-    max-width: 500px;
-  }
-  .hero-actions {
-    display: flex;
-    gap: 1.2rem;
-    margin-bottom: 3rem;
-  }
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: var(--accent);
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 0.85rem 2rem;
-    border-radius: 100px;
-    text-decoration: none;
-    transition: all 0.3s;
-    box-shadow: 0 8px 24px rgba(124,106,247,0.4);
-  }
-  .btn-primary:hover {
-    background: #6a57e6;
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(124,106,247,0.6);
-  }
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border2);
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 0.85rem 2rem;
-    border-radius: 100px;
-    text-decoration: none;
-    transition: all 0.3s;
-    backdrop-filter: blur(8px);
-  }
-  .btn-secondary:hover {
-    background: rgba(255,255,255,0.08);
-    transform: translateY(-3px);
-    border-color: var(--accent);
-  }
-  
-  .hero-socials {
-    display: flex;
-    gap: 1.2rem;
-  }
-  .hero-socials a {
-    width: 44px; height: 44px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%;
-    border: 1px solid var(--border2);
-    color: var(--muted);
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-  .hero-socials a:hover {
-    color: #fff;
-    border-color: var(--accent);
-    background: rgba(124,106,247,0.15);
-    transform: translateY(-4px);
-  }
-
-  /* RIGHT: Visual */
-  .hero-visual {
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  .hero-portrait-wrap {
-    position: relative;
-    width: 100%;
-    max-width: 380px;
-  }
-  .hero-portrait-glow {
-    position: absolute;
-    inset: -30px;
-    background: radial-gradient(circle at 50% 50%, rgba(124,106,247,0.4) 0%, rgba(45,212,191,0.1) 60%, transparent 80%);
-    border-radius: 50%;
-    filter: blur(40px);
-    z-index: 0;
-  }
-  .hero-portrait {
-    position: relative; z-index: 1;
-    width: 100%;
-    border-radius: 20px;
-    display: block;
-    object-fit: cover;
-  }
-  .hero-badge {
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: rgba(20,20,35,0.85);
-    border: 1px solid var(--accent);
-    border-radius: 100px;
-    padding: 0.6rem 1.4rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #fff;
-    white-space: nowrap;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 10px 30px rgba(124,106,247,0.3);
-  }
-  .badge-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: var(--teal);
-    animation: pulse 2s infinite;
-    flex-shrink: 0;
-    box-shadow: 0 0 10px var(--teal);
-  }
-  @keyframes pulse {
-    0%,100% { opacity:1; }
-    50% { opacity:0.4; }
-  }
-
-  /* SECTION HEADERS */
-  .sec-label {
-    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;
-  }
-  .sec-title {
-    font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem);
-    font-weight: 700; margin-bottom: 1rem; color: #fff;
-  }
-  .sec-line {
-    width: 48px; height: 3px; border-radius: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--teal));
-    margin-bottom: 3rem;
-  }
-
-  /* ABOUT */
-  #about { background: var(--bg2); max-width: 100%; padding-left: 10vw; padding-right: 10vw; }
-  .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.97rem; }
-  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .stat-card {
-    background: var(--card); border: 0.5px solid var(--border);
-    border-radius: 16px; padding: 1.5rem;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .stat-card:hover { border-color: var(--border2); transform: translateY(-3px); }
-  .stat-num {
-    font-family: 'Syne', sans-serif; font-size: 2rem;
-    font-weight: 800; color: var(--accent2);
-  }
-  .stat-lbl { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
-
-  /* SKILLS */
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-  .skill-group {
-    background: var(--card); border: 0.5px solid var(--border);
-    border-radius: 16px; padding: 1.5rem;
-    transition: border-color 0.2s;
-  }
-  .skill-group:hover { border-color: var(--border2); }
-  .skill-group-title {
-    font-family: 'Syne', sans-serif; font-weight: 700;
-    font-size: 0.85rem; letter-spacing: 0.05em;
-    color: var(--accent2); margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .skill-group-title i { color: var(--teal); }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .skill-tag {
-    background: rgba(124,106,247,0.1); border: 0.5px solid var(--border);
-    color: var(--text); font-size: 0.78rem; font-weight: 400;
-    padding: 0.3rem 0.8rem; border-radius: 100px;
-    transition: all 0.2s;
-  }
-  .skill-tag:hover { background: rgba(124,106,247,0.2); border-color: var(--border2); }
-
-  /* PROJECTS */
-  #projects { background: var(--bg2); max-width: 100%; padding-left: 10vw; padding-right: 10vw; }
-  .projects-inner { max-width: 1100px; margin: 0 auto; }
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
-  .project-card {
-    background: var(--card); border: 0.5px solid var(--border);
-    border-radius: 20px; padding: 1.8rem;
-    transition: all 0.3s; position: relative; overflow: hidden;
-  }
-  .project-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--teal));
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .project-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: var(--glow); }
-  .project-card:hover::before { opacity: 1; }
-  .project-icon {
-    width: 44px; height: 44px; border-radius: 12px;
-    background: rgba(124,106,247,0.15); border: 0.5px solid var(--border2);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1rem; font-size: 1.2rem; color: var(--accent2);
-  }
-  .project-name {
-    font-family: 'Syne', sans-serif; font-size: 1.05rem;
-    font-weight: 700; color: #fff; margin-bottom: 0.6rem;
-  }
-  .project-desc { font-size: 0.87rem; color: var(--muted); margin-bottom: 1.2rem; line-height: 1.6; }
-  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
-  .stack-tag {
-    font-size: 0.72rem; padding: 0.2rem 0.65rem; border-radius: 100px;
-    background: rgba(45,212,191,0.1); color: var(--teal);
-    border: 0.5px solid rgba(45,212,191,0.25);
-  }
-  .project-link {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    color: var(--accent2); text-decoration: none; font-size: 0.82rem;
-    font-weight: 500; transition: gap 0.2s;
-  }
-  .project-link:hover { gap: 0.7rem; }
-
-  /* GITHUB REPOS */
-  .github-section { margin-top: 3rem; }
-  .github-title {
-    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem;
-    color: #fff; margin-bottom: 1.2rem;
-    display: flex; align-items: center; gap: 0.7rem;
-  }
-  .github-title i { color: var(--muted); }
-  #gh-repos { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
-  .repo-card {
-    background: var(--card2); border: 0.5px solid var(--border);
-    border-radius: 14px; padding: 1.2rem; text-decoration: none;
-    transition: all 0.2s; display: block;
-  }
-  .repo-card:hover { border-color: var(--border2); transform: translateY(-2px); }
-  .repo-name { font-weight: 600; font-size: 0.88rem; color: var(--accent2); margin-bottom: 0.4rem; }
-  .repo-desc { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.8rem; line-height: 1.5; }
-  .repo-meta { display: flex; align-items: center; gap: 1rem; font-size: 0.75rem; color: var(--muted); }
-  .repo-lang { display: flex; align-items: center; gap: 0.35rem; }
-  .lang-dot { width: 8px; height: 8px; border-radius: 50%; }
-  .repo-stars { display: flex; align-items: center; gap: 0.3rem; }
-  .gh-loading { color: var(--muted); font-size: 0.88rem; padding: 1rem; }
-
-  /* LEADERSHIP */
-  .timeline { position: relative; padding-left: 2rem; }
-  .timeline::before {
-    content: ''; position: absolute; left: 0; top: 0.6rem; bottom: 0;
-    width: 1px; background: linear-gradient(180deg, var(--accent), transparent);
-  }
-  .tl-item { position: relative; margin-bottom: 2.5rem; }
-  .tl-dot {
-    position: absolute; left: -2.4rem; top: 0.4rem;
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--accent); border: 2px solid var(--bg);
-    box-shadow: 0 0 8px var(--accent);
-  }
-  .tl-role {
-    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: #fff;
-  }
-  .tl-org { color: var(--accent2); font-size: 0.88rem; font-weight: 500; margin: 0.2rem 0; }
-  .tl-period { color: var(--muted); font-size: 0.78rem; }
-
-  /* VOLUNTEER */
-  #volunteer { background: var(--bg2); max-width: 100%; padding-left: 10vw; padding-right: 10vw; }
-  .volunteer-inner { max-width: 1100px; margin: 0 auto; }
-  .vol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
-  .vol-card {
-    background: var(--card); border: 0.5px solid var(--border);
-    border-radius: 16px; padding: 1.4rem;
-    transition: all 0.2s;
-  }
-  .vol-card:hover { border-color: var(--border2); transform: translateY(-3px); }
-  .vol-org { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; color: #fff; margin-bottom: 0.3rem; }
-  .vol-role { color: var(--teal); font-size: 0.83rem; font-weight: 500; margin-bottom: 0.3rem; }
-  .vol-period { color: var(--muted); font-size: 0.75rem; margin-bottom: 0.6rem; }
-  .vol-desc { color: var(--muted); font-size: 0.82rem; line-height: 1.55; }
-
-  /* CONTACT */
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  .contact-text p { color: var(--muted); font-size: 0.97rem; margin-bottom: 1.5rem; }
-  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
-  .contact-link {
-    display: flex; align-items: center; gap: 1rem;
-    background: var(--card); border: 0.5px solid var(--border);
-    border-radius: 14px; padding: 1rem 1.2rem;
-    text-decoration: none; color: var(--text);
-    transition: all 0.2s;
-  }
-  .contact-link:hover { border-color: var(--border2); transform: translateX(4px); }
-  .contact-icon {
-    width: 40px; height: 40px; border-radius: 10px;
-    background: rgba(124,106,247,0.15);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem; color: var(--accent2); flex-shrink: 0;
-  }
-  .cl-label { font-size: 0.72rem; color: var(--muted); }
-  .cl-val { font-size: 0.88rem; font-weight: 500; color: var(--text); }
-  .contact-form { background: var(--card); border: 0.5px solid var(--border); border-radius: 20px; padding: 2rem; }
-  .form-row { margin-bottom: 1.2rem; }
-  .form-row label { display: block; font-size: 0.78rem; color: var(--muted); margin-bottom: 0.4rem; }
-  .form-row input, .form-row textarea {
-    width: 100%; background: var(--bg3); border: 0.5px solid var(--border);
-    border-radius: 10px; padding: 0.75rem 1rem; color: var(--text);
-    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
-    outline: none; transition: border-color 0.2s; resize: vertical;
-  }
-  .form-row input:focus, .form-row textarea:focus { border-color: var(--border2); }
-
-  /* FOOTER */
-  footer {
-    text-align: center; padding: 2rem; color: var(--muted);
-    font-size: 0.82rem; border-top: 0.5px solid var(--border);
-  }
-
-  /* ANIMATIONS */
-  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .hero-2col {
-      grid-template-columns: 1fr;
-      text-align: center;
-      gap: 3rem;
-    }
-    .hero-content {
-      align-items: center;
-    }
-    .hero-desc { max-width: 100%; }
-    .hero-visual { justify-content: center; order: -1; } /* Image on top */
-    .hero-portrait-wrap { width: clamp(240px, 70vw, 320px); margin: 0 auto; }
-  }
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    section { padding: 4rem 1.5rem; }
-    #hero, #about, #projects, #research, #volunteer, #achievements { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .about-inner, .contact-grid { grid-template-columns: 1fr; }
-    .about-stats { grid-template-columns: 1fr 1fr; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hirusha Jayasundara — Data Scientist, ML Researcher & Data Engineer specializing in AI, predictive modeling, and database design.">
+    <meta name="keywords" content="Data Science, Machine Learning, Data Engineering, AI Researcher, Python, SQL, PostgreSQL">
+    <title>Hirusha Jayasundara — Data Scientist & ML Researcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">HJ</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#leadership">Leadership</a></li>
-    <li><a href="#volunteer">Volunteer</a></li>
-    <li><a href="#achievements">Achievements</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<section id="hero">
-  <div class="hero-glow hero-glow-l"></div>
-  <div class="hero-glow hero-glow-r"></div>
-  <div class="hero-wrapper container">
-    <div class="hero-2col">
-      <!-- LEFT: Content -->
-      <div class="hero-content fade-up">
-        <div class="hero-label">Data Science, AI &amp; ML</div>
-        <h1 class="hero-name">Hirusha<br>Jayasundara</h1>
-        <p class="hero-desc">Passionate about building intelligent, data-driven solutions that bridge the gap between complex algorithms and real-world impact.</p>
-        
-        <div class="hero-actions">
-          <a href="#contact" class="btn-primary">Get In Touch <i class="fa-solid fa-arrow-right"></i></a>
-          <a href="#projects" class="btn-secondary">View Projects</a>
+    <!-- ===================== NAVIGATION ===================== -->
+    <nav class="nav" id="main-nav">
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo">HJ<span class="accent-dot">.</span></a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about" class="nav-link" id="navlink-about">About Me</a></li>
+                <li><a href="#experience" class="nav-link" id="navlink-experience">Experience</a></li>
+                <li><a href="#portfolio" class="nav-link" id="navlink-portfolio">Projects</a></li>
+                <li><a href="#research" class="nav-link" id="navlink-research">Research</a></li>
+                <li><a href="#volunteer" class="nav-link" id="navlink-volunteer">Volunteer</a></li>
+                <li><a href="#services" class="nav-link" id="navlink-services">Services</a></li>
+            </ul>
+            <a href="#contact" class="btn-pill" id="nav-hire-btn">Hire Me</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
+    </nav>
 
-        <div class="hero-socials">
-          <a href="https://github.com/Hiru-stack" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="https://linkedin.com/in/hirushajayasundara-676a8a249" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="mailto:hirushajayasundara03@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-          <a href="https://linktr.ee/Hirusha_Jayasundara" target="_blank" aria-label="Linktree">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle;">
-              <path d="M13.51 5.85L15.62 3.7l1.73 1.76-3.84 3.91H24v2.51h-6.28l3.65 3.72-1.74 1.76-5.85-5.94h-.23v12.5h-3.05V11.41h-.27L4.35 17.38 2.61 15.62l3.69-3.76H0V9.37h10.45L6.64 5.48l1.73-1.77 2.1 2.14v-5.8h3.04v5.8z"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- RIGHT: Visual -->
-      <div class="hero-visual fade-up">
-        <div class="hero-portrait-wrap">
-          <div class="hero-portrait-glow"></div>
-          <img src="111.png" alt="Hirusha Jayasundara" class="hero-portrait" />
-          <div class="hero-badge">
-            <span class="badge-dot"></span> Seeking for Internships
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<div id="about">
-  <div class="about-inner">
-    <div class="about-text fade-up">
-      <div class="sec-label">About Me</div>
-      <h2 class="sec-title">Turning data into<br/>meaningful impact</h2>
-      <div class="sec-line"></div>
-      <p>I'm a final-year ICT Honours undergraduate at the University of Vavuniya, Sri Lanka, with a deep passion for Data Science, Artificial Intelligence, and Data Engineering. I love building end-to-end solutions — from raw data pipelines to interactive dashboards and predictive models.</p>
-      <p>Beyond code, I'm an active student leader in IEEE and Leo Club communities, where I've developed strong communication, teamwork, and project coordination skills. I'm always exploring new technologies and driven by the belief that data, when used well, can solve real-world problems.</p>
-      <p>Currently seeking an internship where I can contribute to impactful AI/ML projects while growing alongside experienced engineers and data scientists.</p>
-    </div>
-    <div class="about-stats fade-up">
-      <div class="stat-card">
-        <div class="stat-num">3+</div>
-        <div class="stat-lbl">End-to-end Projects</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">5+</div>
-        <div class="stat-lbl">Leadership Roles</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">8+</div>
-        <div class="stat-lbl">Technical Skills</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">4</div>
-        <div class="stat-lbl">Languages Spoken</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="sec-label">Expertise</div>
-  <h2 class="sec-title">Skills & Tools</h2>
-  <div class="sec-line"></div>
-  <div class="skills-grid fade-up">
-    <div class="skill-group">
-      <div class="skill-group-title"><i class="fa-solid fa-code"></i> Technical Skills</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">Java</span>
-        <span class="skill-tag">C++</span>
-        <span class="skill-tag">Assembly</span>
-        <span class="skill-tag">HTML</span>
-        <span class="skill-tag">CSS</span>
-        <span class="skill-tag">Machine Learning</span>
-        <span class="skill-tag">Data Analysis</span>
-        <span class="skill-tag">SQL</span>
-        <span class="skill-tag">PostgreSQL</span>
-        <span class="skill-tag">Data Visualization</span>
-        <span class="skill-tag">ETL Pipelines</span>
-        <span class="skill-tag">Web Development</span>
-        <span class="skill-tag">Database Management</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title"><i class="fa-solid fa-toolbox"></i> Libraries & Tools</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Pandas & NumPy</span>
-        <span class="skill-tag">Scikit-learn</span>
-        <span class="skill-tag">PyTorch</span>
-        <span class="skill-tag">TensorFlow</span>
-        <span class="skill-tag">Streamlit</span>
-        <span class="skill-tag">Plotly / Matplotlib</span>
-        <span class="skill-tag">Flask</span>
-        <span class="skill-tag">Power BI</span>
-        <span class="skill-tag">Git & GitHub</span>
-        <span class="skill-tag">Ubuntu</span>
-        <span class="skill-tag">Jupyter Notebook</span>
-        <span class="skill-tag">VS Code</span>
-        <span class="skill-tag">AutoCAD</span>
-        <span class="skill-tag">Proteus</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title"><i class="fa-solid fa-users"></i> Soft Skills</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Leadership</span>
-        <span class="skill-tag">Teamwork</span>
-        <span class="skill-tag">Communication</span>
-        <span class="skill-tag">Problem Solving</span>
-        <span class="skill-tag">Event Coordination</span>
-        <span class="skill-tag">Mentoring</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title"><i class="fa-solid fa-language"></i> Languages</div>
-      <div class="skill-tags">
-        <span class="skill-tag">English – Fluent</span>
-        <span class="skill-tag">Sinhala – Native</span>
-        <span class="skill-tag">Tamil – Intermediate</span>
-        <span class="skill-tag">Korean – Intermediate</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<div id="projects">
-  <div class="projects-inner">
-    <div class="sec-label">Work</div>
-    <h2 class="sec-title">Featured Projects</h2>
-    <div class="sec-line"></div>
-    <div class="projects-grid fade-up">
-
-      <div class="project-card">
-        <div class="project-icon"><i class="fa-solid fa-credit-card"></i></div>
-        <div class="project-name">Payonic – Campus FinTech Ecosystem</div>
-        <div class="project-desc">Developed a secure cashless payment ecosystem for university campuses with QR payments, recurring payments, digital wallets, and admin governance features with spending analytics.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Flask</span>
-          <span class="stack-tag">JavaScript</span>
-          <span class="stack-tag">SQLite</span>
-          <span class="stack-tag">SQLAlchemy</span>
-        </div>
-        <a href="https://github.com/Hiru-stack/PAYONIC" target="_blank" class="project-link">
-          <i class="fa-brands fa-github"></i> View on GitHub <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i>
-        </a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon"><i class="fa-solid fa-brain"></i></div>
-        <div class="project-name">SmartLoan AI</div>
-        <div class="project-desc">An AI-powered loan prediction and recommendation platform analyzing user financial data to predict loan approval possibilities and generate automated reports.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Machine Learning</span>
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">Flask</span>
-        </div>
-        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
-          <a href="https://github.com/Hiru-stack/SmartLoan-AI" target="_blank" class="project-link">
-            <i class="fa-brands fa-github"></i> View on GitHub <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon"><i class="fa-solid fa-database"></i></div>
-        <div class="project-name">University Data Warehouse System</div>
-        <div class="project-desc">Designed and implemented a Star Schema data warehouse for university analytics. Built an automated ETL pipeline and interactive dashboards using Streamlit and Plotly for real-time insights.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">PostgreSQL</span>
-          <span class="stack-tag">Streamlit</span>
-          <span class="stack-tag">ETL</span>
-          <span class="stack-tag">Plotly</span>
-        </div>
-        <a href="https://github.com/Hiru-stack/Data-engineering-project" target="_blank" class="project-link">
-          <i class="fa-brands fa-github"></i> View on GitHub <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i>
-        </a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon"><i class="fa-solid fa-flag-checkered"></i></div>
-        <div class="project-name">Formula 1 Performance Analytics</div>
-        <div class="project-desc">Analyzed F1 race data using the FastF1 library. Developed ML models to predict race outcomes and built an interactive dashboard for lap-time analysis and driver performance comparisons.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">Pandas</span>
-          <span class="stack-tag">Scikit-learn</span>
-          <span class="stack-tag">Streamlit</span>
-          <span class="stack-tag">Matplotlib</span>
-        </div>
-        <a href="https://github.com/Hiru-stack/-Formula-1-Performance-Analytics" target="_blank" class="project-link">
-          <i class="fa-brands fa-github"></i> View on GitHub <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i>
-        </a>
-      </div>
-
-      <div class="project-card" style="padding: 1.5rem;">
-        <div class="project-name" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Laptop Price Web Scraper</div>
-        <div class="project-desc" style="font-size: 0.85rem;">A Python scraper using BeautifulSoup to extract laptop prices, stored efficiently with Pandas.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">BeautifulSoup</span>
-        </div>
-        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
-          <a href="https://github.com/Hiru-stack/Laptop-Price-Web-Scraper" target="_blank" class="project-link">
-            <i class="fa-brands fa-github"></i> View on GitHub <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="project-card" style="padding: 1.5rem;">
-        <div class="project-name" style="font-size: 1.1rem; margin-bottom: 0.5rem;">CSV Data Cleaning Pipeline</div>
-        <div class="project-desc" style="font-size: 0.85rem;">An automated data cleaning pipeline designed to process and normalize raw CSV datasets.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">Pandas</span>
-        </div>
-        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
-          <a href="https://github.com/Hiru-stack/CSV-Data-Cleaning-Pipeline" target="_blank" class="project-link">
-            <i class="fa-brands fa-github"></i> View on GitHub <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="project-card" style="padding: 1.5rem;">
-        <div class="project-name" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Spotify Data Analysis</div>
-        <div class="project-desc" style="font-size: 0.85rem;">Exploratory data analysis project uncovering music trends and insights from Spotify datasets.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">Data Analysis</span>
-        </div>
-        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
-          <a href="https://github.com/Hiru-stack/SpotifyProject-DataAnalyze" target="_blank" class="project-link">
-            <i class="fa-brands fa-github"></i> View on GitHub <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="project-card" style="padding: 1.5rem;">
-        <div class="project-name" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Linear Regression Project</div>
-        <div class="project-desc" style="font-size: 0.85rem;">Implemented linear regression models to analyze datasets and build predictive machine learning capabilities.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">Machine Learning</span>
-        </div>
-        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
-          <a href="https://github.com/Hiru-stack/Linear-Regression-Project" target="_blank" class="project-link">
-            <i class="fa-brands fa-github"></i> View on GitHub <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i>
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- RESEARCH -->
-<div id="research" style="background: var(--bg); max-width: 100%; padding-top: 6rem; padding-bottom: 6rem; padding-left: 10vw; padding-right: 10vw;">
-  <div class="projects-inner">
-    <div class="sec-label">Academic & Industry</div>
-    <h2 class="sec-title">Ongoing Research</h2>
-    <div class="sec-line"></div>
-    <div class="projects-grid fade-up" style="grid-template-columns: 1fr;">
-
-      <div class="project-card">
-        <div style="display: flex; justify-content: space-between; align-items: stretch; flex-wrap: wrap-reverse; gap: 3rem;">
-          <div style="flex: 1; min-width: 300px;">
-            <div class="project-icon"><i class="fa-solid fa-microscope"></i></div>
-            <div class="project-name" style="font-size: 1.2rem; margin-bottom: 1rem;">SmartLoan AI <span style="font-size:0.75rem; color:var(--pink); border: 0.5px solid rgba(244,114,182,0.25); border-radius:100px; padding:0.2rem 0.6rem; margin-left:0.5rem; background:rgba(244,114,182,0.1); vertical-align:middle;">Targeting ICTer Conference</span></div>
-            
-            <div class="project-desc" style="font-size: 0.9rem;">
-              <p style="margin-bottom: 1rem;">Currently expanding the SmartLoan AI project into formal academic research. The focus is on evaluating machine learning prediction models that analyze loan approval possibilities based on user financial details.</p>
-              
-              <p style="margin-bottom: 0.5rem; color: #fff; font-weight: 600;">🔹 Focus Areas:</p>
-              <ul style="margin-left: 1.2rem; margin-bottom: 1.2rem; color: var(--muted); font-size: 0.85rem; line-height: 1.6; list-style-type: disc;">
-                <li>Data collection & preprocessing methodologies</li>
-                <li>Exploratory Data Analysis (EDA) on financial datasets</li>
-                <li>Building and benchmarking loan prediction models</li>
-                <li>AI-powered loan approval prediction accuracy</li>
-              </ul>
-              
-              <p style="margin-bottom: 1.2rem;">This research aims to strengthen the understanding of how intelligent systems can support financial decision-making, with the ultimate goal of publishing our findings at the upcoming <strong>ICTer Conference</strong>.</p>
+    <!-- ===================== HERO SECTION ===================== -->
+    <section class="hero" id="home">
+        <div class="hero-bg-glow"></div>
+        <div class="hero-bg-grid"></div>
+        <div class="container hero-grid">
+            <!-- Left Column -->
+            <div class="hero-left">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    Seeking for Internships
+                </div>
+                <h1 class="hero-title">
+                    <span class="greeting">Hello, I'm</span>
+                    <span class="name-highlight">Hirusha Jayasundara</span>
+                </h1>
+                <div class="role-stack">
+                    <div class="role-item">
+                        <span class="role-line"></span>
+                        <span class="role-text">Data Scientist</span>
+                    </div>
+                    <div class="role-item active-role">
+                        <span class="role-line"></span>
+                        <span class="role-text" id="typed-text">ML Researcher</span><span class="typed-cursor">|</span>
+                    </div>
+                    <div class="role-item">
+                        <span class="role-line"></span>
+                        <span class="role-text">Data Engineer</span>
+                    </div>
+                </div>
+                <p class="hero-bio">Motivated ICT undergraduate with interests in Artificial Intelligence, Data Science, Data Engineering, and Business Analytics. Experienced in Python, SQL, and database technologies through research and project-based learning.</p>
+                <div class="hero-cta">
+                    <a href="#portfolio" class="btn-gradient" id="hero-portfolio-btn">Explore Projects</a>
+                    <a href="./Hirusha_Jayasundara_CV_final.pdf" class="btn-outline" download id="cv-download-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;vertical-align:middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download CV
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-num">3.40</span>
+                        <span class="stat-label">Vavuniya Uni GPA</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-num">4+</span>
+                        <span class="stat-label">Years Leadership</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-num">A+</span>
+                        <span class="stat-label">Cybersec Pass</span>
+                    </div>
+                </div>
             </div>
-            
-            <div class="project-stack">
-              <span class="stack-tag">Machine Learning</span>
-              <span class="stack-tag">Data Analytics</span>
-              <span class="stack-tag">Predictive Modeling</span>
+
+            <!-- Right Column — Portrait & Node Network -->
+            <div class="hero-right">
+                <div class="portrait-wrapper">
+                    <div class="portrait-glow"></div>
+                    <div class="portrait-ring"></div>
+                    <img src="profile.png" alt="Hirusha Jayasundara - Data Scientist & ML Researcher" class="portrait-img" id="portrait-img">
+
+                    <!-- SVG Node Paths -->
+                    <svg class="node-svg" viewBox="0 0 420 440" xmlns="http://www.w3.org/2000/svg" id="node-svg" aria-hidden="true">
+                        <defs>
+                            <filter id="glow-filter">
+                                <feGaussianBlur stdDeviation="2" result="blur"/>
+                                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+                        </defs>
+                        <line class="node-line" id="line-linkedin" x1="210" y1="220" x2="40" y2="90" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <line class="node-line" id="line-github" x1="210" y1="220" x2="380" y2="70" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <line class="node-line" id="line-email" x1="210" y1="220" x2="385" y2="330" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <line class="node-line" id="line-linktree" x1="210" y1="220" x2="45" y2="320" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <circle cx="40" cy="90" r="5" class="node-dot" filter="url(#glow-filter)"/>
+                        <circle cx="380" cy="70" r="5" class="node-dot" filter="url(#glow-filter)"/>
+                        <circle cx="385" cy="330" r="5" class="node-dot node-dot--orange" filter="url(#glow-filter)"/>
+                        <circle cx="45" cy="320" r="5" class="node-dot node-dot--green" filter="url(#glow-filter)"/>
+                    </svg>
+
+                    <!-- Social Network Nodes -->
+                    <a href="https://linkedin.com/in/hirusha-jayasundara-676a8a249" target="_blank" rel="noopener" class="social-node" id="node-linkedin" style="top:14%;left:-2%;" data-line="line-linkedin" aria-label="LinkedIn Profile">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/Hiru-stack/Hiru-stack" target="_blank" rel="noopener" class="social-node" id="node-github" style="top:7%;right:-2%;" data-line="line-github" aria-label="GitHub Profile">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="mailto:hirushajayasundara03@gmail.com" class="social-node social-node--orange" id="node-email" style="bottom:20%;right:-2%;" data-line="line-email" aria-label="Send Email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Email Me</span>
+                    </a>
+                    <a href="https://linktr.ee/Hirusha_Jayasundara" target="_blank" rel="noopener" class="social-node social-node--green" id="node-linktree" style="bottom:22%;left:-2%;" data-line="line-linktree" aria-label="Linktree Profile">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m13.511 5.853 4.005-4.117 2.325 1.517-3.13 3.222h5.289v2.774h-6.273l3.825 3.931-1.937 1.992-5.115-5.258v7.91h-3.001v-7.91l-5.115 5.258-1.937-1.992 3.825-3.931H.001V6.479h5.289L2.16 3.257 4.485 1.74l4.005 4.113V0h3.022v5.853zM10.5 24h3v-3h-3v3z"/></svg>
+                        <span>Linktree</span>
+                    </a>
+                </div>
             </div>
-            
-            <div style="display: flex; gap: 1.5rem; margin-top: 1.5rem;">
-              <a href="https://github.com/Hiru-stack/SmartLoan-AI" target="_blank" class="project-link">
-                <i class="fa-brands fa-github"></i> View on GitHub <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i>
-              </a>
-              <a href="https://lnkd.in/gsENwEHK" target="_blank" class="project-link" style="color: var(--teal);">
-                <i class="fa-solid fa-globe"></i> Live Website <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i>
-              </a>
-            </div>
-          </div>
-          
-          <div style="flex: 1.2; min-width: 300px; display: flex; align-items: center; justify-content: center;">
-             <img src="ss.png" alt="SmartLoan AI Research" style="width: 100%; border-radius: 12px; object-fit: cover; border: 1px solid var(--border); box-shadow: var(--glow);">
-          </div>
         </div>
-      </div>
 
-    </div>
-  </div>
-</div>
+        <div class="scroll-indicator" id="scroll-indicator" aria-label="Scroll down">
+            <span>Scroll Down</span>
+            <div class="scroll-line"><div class="scroll-dot-inner"></div></div>
+        </div>
+    </section>
 
-<!-- LEADERSHIP -->
-<section id="leadership">
-  <div class="sec-label">Leadership</div>
-  <h2 class="sec-title">Roles & Responsibilities</h2>
-  <div class="sec-line"></div>
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:3rem;" class="fade-up">
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-role">Chairwoman</div>
-        <div class="tl-org">IEEE WIE Student Branch Affinity Group, UoV</div>
-        <div class="tl-period">Oct 2025 – Present</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-role">Secretary</div>
-        <div class="tl-org">Leo Club of University of Vavuniya</div>
-        <div class="tl-period">Jun 2025 – Present</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-role">Assistant Secretary</div>
-        <div class="tl-org">Leo Club of University of Vavuniya</div>
-        <div class="tl-period">Sep 2024 – Jun 2025</div>
-      </div>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-role">Industry Committee Engagement Lead</div>
-        <div class="tl-org">IEEE Computer Society SYP</div>
-        <div class="tl-period">Oct 2025 – Jan 2026</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-role">Secretary</div>
-        <div class="tl-org">IEEE Computer Society, University of Vavuniya</div>
-        <div class="tl-period">2024 – Oct 2025</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-role">Project Coordinator (Secretary Team)</div>
-        <div class="tl-org">IEEE Innovation Nation Sri Lanka</div>
-        <div class="tl-period">Feb 2026 – Present</div>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- ===================== ABOUT / COMPETENCY ===================== -->
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="section-label">WHO I AM</div>
+            <div class="about-grid">
+                <div class="about-left">
+                    <h2 class="section-title">Data-Driven Research.<br><span class="gradient-text">Intelligent Solutions.</span></h2>
+                    <p class="about-bio">I am an Information and Communication Technology undergraduate reading for an Honours degree at the University of Vavuniya. My academic journey is fueled by a passion for Artificial Intelligence, Machine Learning, Data Science, and Systems Engineering.</p>
+                    <p class="about-bio">Combining strong academic foundations with active leadership roles in the IEEE Student Branch and Leo Club, I focus on bridging the gap between theoretical data models and real-world system optimization.</p>
+                    <div class="about-tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">NumPy</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">Streamlit</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">Power BI</span>
+                    </div>
+                    <a href="#experience" class="btn-gradient" id="about-exp-btn">View Experience Matrix →</a>
+                </div>
+                <div class="about-right">
+                    <div class="capability-card" id="cap-card-1">
+                        <div class="cap-accent"></div>
+                        <div class="cap-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        </div>
+                        <div class="cap-content">
+                            <h3 class="cap-title">Machine Learning & Modeling</h3>
+                            <p class="cap-desc">Python (Pandas, Scikit-learn, NumPy) · Predictive analytics · Financial decision support modeling.</p>
+                        </div>
+                    </div>
+                    <div class="capability-card" id="cap-card-2">
+                        <div class="cap-accent"></div>
+                        <div class="cap-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                        </div>
+                        <div class="cap-content">
+                            <h3 class="cap-title">Database Design & ETL</h3>
+                            <p class="cap-desc">SQL & PostgreSQL schema design · Automated ETL data pipelines · Star Schema architectures.</p>
+                        </div>
+                    </div>
+                    <div class="capability-card" id="cap-card-3">
+                        <div class="cap-accent"></div>
+                        <div class="cap-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                        </div>
+                        <div class="cap-content">
+                            <h3 class="cap-title">Interactive Dashboards & Web</h3>
+                            <p class="cap-desc">Streamlit dashboards · Flask Web Development · Power BI reporting & spending analytics.</p>
+                        </div>
+                    </div>
+                    <div class="capability-card" id="cap-card-4">
+                        <div class="cap-accent cap-accent--orange"></div>
+                        <div class="cap-icon cap-icon--orange">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <div class="cap-content">
+                            <h3 class="cap-title">Cybersecurity & Ethical Hacking</h3>
+                            <p class="cap-desc">Diploma from SITC Campus (Completed with A+) · Basic network security assessment & hardening techniques.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- VOLUNTEER -->
-<div id="volunteer">
-  <div class="volunteer-inner">
-    <div class="sec-label">Community</div>
-    <h2 class="sec-title">Volunteer Experience</h2>
-    <div class="sec-line"></div>
-    <div class="vol-grid fade-up">
+    <!-- ===================== EXPERIENCE MATRIX ===================== -->
+    <section class="experience section" id="experience">
+        <div class="container">
+            <div class="section-label">TRACK RECORD</div>
+            <h2 class="section-title">Leadership & <span class="gradient-text">Academic Matrix</span></h2>
+            <div class="exp-list">
 
-      <div class="vol-card">
-        <div class="vol-org">Sasnaka Sansada Foundation</div>
-        <div class="vol-role">Multi-role Volunteer</div>
-        <div class="vol-period">1 year 10 months</div>
-        <div class="vol-desc">Served as Mentor at the Nipayumani First Commit Program, Ambassador in FOW, HR Team Member for the Nuwara Eliya District, and Translation Team Member at ICT EduTalk.</div>
-      </div>
+                <!-- 1. IEEE Innovation Nation Sri Lanka -->
+                <div class="exp-item success-card" id="exp-1">
+                    <div class="exp-main">
+                        <div class="exp-header">
+                            <div class="exp-meta">
+                                <span class="exp-date">Feb 2026 — Present</span>
+                                <h3 class="exp-title">Project Coordinator (Secretary Team)</h3>
+                                <span class="exp-company">IEEE Innovation Nation Sri Lanka</span>
+                            </div>
+                            <div class="exp-badges">
+                                <span class="badge">Project Management</span>
+                                <span class="badge">IEEE SR</span>
+                                <span class="badge badge--pink">Innovation</span>
+                            </div>
+                        </div>
+                        <p class="exp-desc">Serving within the Secretary Team to coordinate and document project timelines, resources, and outreach programs for student-led innovation challenges nationwide.</p>
+                    </div>
+                    <div class="exp-metric">
+                        <span class="metric-num">National</span>
+                        <span class="metric-label">Scale Project</span>
+                        <span class="metric-sub">coordinated across Sri Lanka chapters</span>
+                    </div>
+                </div>
 
-      <div class="vol-card">
-        <div class="vol-org">IEEE Innovation Nation Sri Lanka</div>
-        <div class="vol-role">Project Coordinator – Secretary Team</div>
-        <div class="vol-period">Feb 2026 – Present (4 months)</div>
-        <div class="vol-desc">Coordinating project activities and supporting the secretariat for one of Sri Lanka's leading IEEE innovation initiatives.</div>
-      </div>
+                <!-- 2. IEEE WIE UoV -->
+                <div class="exp-item success-card" id="exp-2">
+                    <div class="exp-main">
+                        <div class="exp-header">
+                            <div class="exp-meta">
+                                <span class="exp-date">Oct 2025 — Present</span>
+                                <h3 class="exp-title">Chairwoman</h3>
+                                <span class="exp-company">IEEE WIE Student Branch Affinity Group of UoV</span>
+                            </div>
+                            <div class="exp-badges">
+                                <span class="badge">Leadership</span>
+                                <span class="badge">WIE</span>
+                                <span class="badge badge--purple">IEEE</span>
+                            </div>
+                        </div>
+                        <p class="exp-desc">Directing events and initiatives to support women in engineering and technology. Coordinating teams and promoting professional development programs across university chapters.</p>
+                    </div>
+                    <div class="exp-metric">
+                        <span class="metric-num">Top Tier</span>
+                        <span class="metric-label">Student Chapter</span>
+                        <span class="metric-sub">at University of Vavuniya</span>
+                    </div>
+                </div>
 
-      <div class="vol-card">
-        <div class="vol-org">IEEE WIE Affinity Group, UoV</div>
-        <div class="vol-role">Chairwoman & Active Member</div>
-        <div class="vol-period">Oct 2025 – Present</div>
-        <div class="vol-desc">Leading the Women in Engineering affinity group, organising educational events, mentoring junior members, and promoting women's participation in STEM at the university.</div>
-      </div>
+                <!-- 3. IEEE CS SYP -->
+                <div class="exp-item success-card" id="exp-3">
+                    <div class="exp-main">
+                        <div class="exp-header">
+                            <div class="exp-meta">
+                                <span class="exp-date">Oct 2025 — Jan 2026</span>
+                                <h3 class="exp-title">Industry Committee Engagement Lead</h3>
+                                <span class="exp-company">IEEE Computer Society SYP</span>
+                            </div>
+                            <div class="exp-badges">
+                                <span class="badge badge--blue">Industry Link</span>
+                                <span class="badge">Engagement</span>
+                                <span class="badge">CS SYP</span>
+                            </div>
+                        </div>
+                        <p class="exp-desc">Facilitated industry-academia connections and coordinated engagement activities between student members and technology industry professionals.</p>
+                    </div>
+                    <div class="exp-metric">
+                        <span class="metric-num">Industry</span>
+                        <span class="metric-label">Engagement Lead</span>
+                        <span class="metric-sub">bridging student & professional tech sectors</span>
+                    </div>
+                </div>
 
-      <div class="vol-card">
-        <div class="vol-org">Leo Club of University of Vavuniya</div>
-        <div class="vol-role">Secretary & Community Leader</div>
-        <div class="vol-period">Jun 2025 – Present</div>
-        <div class="vol-desc">Managing club correspondence, coordinating community service projects, and leading student engagement and social impact initiatives.</div>
-      </div>
+                <!-- 4. Leo Club UoV — Club Secretary -->
+                <div class="exp-item success-card" id="exp-4">
+                    <div class="exp-main">
+                        <div class="exp-header">
+                            <div class="exp-meta">
+                                <span class="exp-date">Jun 2025 — Present</span>
+                                <h3 class="exp-title">Club Secretary</h3>
+                                <span class="exp-company">Leo Club of University of Vavuniya</span>
+                            </div>
+                            <div class="exp-badges">
+                                <span class="badge badge--orange">Administration</span>
+                                <span class="badge">Record-Keeping</span>
+                                <span class="badge">Public Service</span>
+                            </div>
+                        </div>
+                        <p class="exp-desc">Managing all administrative tasks, official correspondence, and communication pipelines for club activities. Awarded Most Outstanding Club Secretary for exemplary performance.</p>
+                    </div>
+                    <div class="exp-metric">
+                        <span class="metric-num">Awarded</span>
+                        <span class="metric-label">Most Outstanding</span>
+                        <span class="metric-sub">Club Secretary Recognition</span>
+                    </div>
+                </div>
 
-      <div class="vol-card">
-        <div class="vol-org">Asian Development Bank Institute (ADBI)</div>
-        <div class="vol-role">Programme Participant</div>
-        <div class="vol-period">Jul 2022 – Sep 2022</div>
-        <div class="vol-desc">Completed a Certificate in Financial Globalization, Capital Flows, and the Global Financial Cycle — broadening knowledge of international economics and global financial systems.</div>
-      </div>
+                <!-- 5. Leo Club UoV — Assistant Secretary -->
+                <div class="exp-item success-card" id="exp-5">
+                    <div class="exp-main">
+                        <div class="exp-header">
+                            <div class="exp-meta">
+                                <span class="exp-date">Jan 2025 — Jun 2025</span>
+                                <h3 class="exp-title">Assistant Secretary</h3>
+                                <span class="exp-company">Leo Club of University of Vavuniya</span>
+                            </div>
+                            <div class="exp-badges">
+                                <span class="badge">Coordination</span>
+                                <span class="badge badge--orange">Documentation</span>
+                                <span class="badge">Community Service</span>
+                            </div>
+                        </div>
+                        <p class="exp-desc">Supported the Secretary in coordinating community service projects, maintaining meeting minutes, and organizing club events. Awarded Most Outstanding Club Administration.</p>
+                    </div>
+                    <div class="exp-metric">
+                        <span class="metric-num">Awarded</span>
+                        <span class="metric-label">Most Outstanding</span>
+                        <span class="metric-sub">Club Administration Recognition</span>
+                    </div>
+                </div>
 
-      <div class="vol-card">
-        <div class="vol-org">IEEE Computer Society SYP</div>
-        <div class="vol-role">Industry Committee Engagement Lead</div>
-        <div class="vol-period">Oct 2025 – Jan 2026</div>
-        <div class="vol-desc">Facilitated industry-academia connections and coordinated engagement activities between student members and technology industry professionals.</div>
-      </div>
+                <!-- 6. IEEE Computer Society UoV Secretary -->
+                <div class="exp-item success-card" id="exp-6">
+                    <div class="exp-main">
+                        <div class="exp-header">
+                            <div class="exp-meta">
+                                <span class="exp-date">2024 — Oct 2025</span>
+                                <h3 class="exp-title">Secretary</h3>
+                                <span class="exp-company">IEEE Computer Society, University of Vavuniya</span>
+                            </div>
+                            <div class="exp-badges">
+                                <span class="badge badge--purple">Technology</span>
+                                <span class="badge">IEEE CS</span>
+                                <span class="badge">Documentation</span>
+                            </div>
+                        </div>
+                        <p class="exp-desc">Structured and documented technical workshops, webinars, and membership drives, expanding the UoV Computer Society chapter footprint and student membership engagement.</p>
+                    </div>
+                    <div class="exp-metric">
+                        <span class="metric-num">Established</span>
+                        <span class="metric-label">Tech Community</span>
+                        <span class="metric-sub">driving student technical literacy</span>
+                    </div>
+                </div>
 
-    </div>
-  </div>
-</div>
 
-<!-- ACHIEVEMENTS -->
-<div id="achievements" style="background: var(--bg); max-width: 100%; padding-top: 6rem; padding-bottom: 6rem; padding-left: 10vw; padding-right: 10vw;">
-  <div class="volunteer-inner">
-    <div class="sec-label">Recognition</div>
-    <h2 class="sec-title">Achievements & Awards</h2>
-    <div class="sec-line"></div>
-    <div class="vol-grid fade-up">
 
-      <div class="vol-card" style="padding: 1rem; text-align: center;">
-        <img src="most oustanding club secretary.jpg" alt="Most Outstanding Club Secretary" style="width: 100%; border-radius: 12px; margin-bottom: 1rem; object-fit: cover; aspect-ratio: 4/3;">
-        <div class="vol-org" style="font-size: 1.05rem;">Most Outstanding Club Secretary</div>
-        <div class="vol-role" style="margin-bottom: 0;">Leo Club of University of Vavuniya</div>
-      </div>
+            </div>
+        </div>
+    </section>
 
-      <div class="vol-card" style="padding: 1rem; text-align: center;">
-        <img src="award receive.jpg" alt="Award Receive" style="width: 100%; border-radius: 12px; margin-bottom: 1rem; object-fit: cover; aspect-ratio: 4/3;">
-        <div class="vol-org" style="font-size: 1.05rem;">Excellence & Recognition</div>
-        <div class="vol-role" style="margin-bottom: 0;">Award Received</div>
-      </div>
+    <!-- ===================== SKILLS & ARSENAL MATRIX ===================== -->
+    <section class="skills section" id="skills">
+        <div class="container">
+            <div class="section-label">CAPABILITIES</div>
+            <h2 class="section-title">Skills & <span class="gradient-text">Technical Arsenal</span></h2>
+            
+            <div class="skills-wrapper">
+                <!-- Left Side: Interactive Category Selector / Headers -->
+                <div class="skills-categories">
+                    <button class="skills-cat-btn active" data-target="cat-tech">
+                        <span class="cat-num">01</span>
+                        <span class="cat-name">Technical Skills</span>
+                    </button>
+                    <button class="skills-cat-btn" data-target="cat-libs">
+                        <span class="cat-num">02</span>
+                        <span class="cat-name">Libraries & Tools</span>
+                    </button>
+                    <button class="skills-cat-btn" data-target="cat-soft">
+                        <span class="cat-num">03</span>
+                        <span class="cat-name">Soft Skills</span>
+                    </button>
+                </div>
+                
+                <!-- Right Side: Content Panels -->
+                <div class="skills-panels">
+                    <!-- Panel 1: Technical Skills -->
+                    <div class="skills-panel active" id="cat-tech">
+                        <div class="panel-grid">
+                            <div class="skill-group">
+                                <h3 class="group-title">Programming Languages</h3>
+                                <div class="skills-tag-grid">
+                                    <div class="skill-tag-item"><span class="tag-dot purple"></span>Python</div>
+                                    <div class="skill-tag-item"><span class="tag-dot purple"></span>Java</div>
+                                    <div class="skill-tag-item"><span class="tag-dot purple"></span>C++</div>
+                                    <div class="skill-tag-item"><span class="tag-dot purple"></span>Assembly</div>
+                                    <div class="skill-tag-item"><span class="tag-dot purple"></span>SQL</div>
+                                    <div class="skill-tag-item"><span class="tag-dot purple"></span>HTML / CSS</div>
+                                </div>
+                            </div>
+                            <div class="skill-group">
+                                <h3 class="group-title">Core Domains</h3>
+                                <div class="skills-tag-grid">
+                                    <div class="skill-tag-item"><span class="tag-dot blue"></span>Machine Learning</div>
+                                    <div class="skill-tag-item"><span class="tag-dot blue"></span>Data Analysis</div>
+                                    <div class="skill-tag-item"><span class="tag-dot blue"></span>PostgreSQL</div>
+                                    <div class="skill-tag-item"><span class="tag-dot blue"></span>Data Visualization</div>
+                                    <div class="skill-tag-item"><span class="tag-dot blue"></span>ETL Pipelines</div>
+                                    <div class="skill-tag-item"><span class="tag-dot blue"></span>Web Development</div>
+                                    <div class="skill-tag-item"><span class="tag-dot blue"></span>Database Management</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    </div>
-  </div>
-</div>
+                    <!-- Panel 2: Libraries & Tools -->
+                    <div class="skills-panel" id="cat-libs">
+                        <div class="panel-grid panel-grid--three">
+                            <div class="skill-group">
+                                <h3 class="group-title">Data & AI</h3>
+                                <div class="skills-tag-grid">
+                                    <div class="skill-tag-item"><span class="tag-dot green"></span>Pandas</div>
+                                    <div class="skill-tag-item"><span class="tag-dot green"></span>NumPy</div>
+                                    <div class="skill-tag-item"><span class="tag-dot green"></span>Scikit-learn</div>
+                                    <div class="skill-tag-item"><span class="tag-dot green"></span>PyTorch</div>
+                                    <div class="skill-tag-item"><span class="tag-dot green"></span>TensorFlow</div>
+                                    <div class="skill-tag-item"><span class="tag-dot green"></span>Jupyter Notebook</div>
+                                </div>
+                            </div>
+                            <div class="skill-group">
+                                <h3 class="group-title">Visualization & Web</h3>
+                                <div class="skills-tag-grid">
+                                    <div class="skill-tag-item"><span class="tag-dot orange"></span>Streamlit</div>
+                                    <div class="skill-tag-item"><span class="tag-dot orange"></span>Plotly</div>
+                                    <div class="skill-tag-item"><span class="tag-dot orange"></span>Matplotlib</div>
+                                    <div class="skill-tag-item"><span class="tag-dot orange"></span>Flask</div>
+                                    <div class="skill-tag-item"><span class="tag-dot orange"></span>Power BI</div>
+                                </div>
+                            </div>
+                            <div class="skill-group">
+                                <h3 class="group-title">DevOps & Workflow</h3>
+                                <div class="skills-tag-grid">
+                                    <div class="skill-tag-item"><span class="tag-dot purple"></span>Git & GitHub</div>
+                                    <div class="skill-tag-item"><span class="tag-dot purple"></span>Ubuntu</div>
+                                    <div class="skill-tag-item"><span class="tag-dot purple"></span>VS Code</div>
+                                    <div class="skill-tag-item"><span class="tag-dot purple"></span>AutoCAD</div>
+                                    <div class="skill-tag-item"><span class="tag-dot purple"></span>Proteus</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="sec-label">Contact</div>
-  <h2 class="sec-title">Let's Connect</h2>
-  <div class="sec-line"></div>
-  <div class="contact-grid fade-up">
-    <div class="contact-text">
-      <p>I'm currently open to internship opportunities in AI, Data Science, and Data Engineering. Whether you want to discuss a role, collaborate on a project, or just say hello — my inbox is open.</p>
-      <div class="contact-links">
-        <a href="mailto:hirushajayasundara03@gmail.com" class="contact-link">
-          <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-          <div>
-            <div class="cl-label">Email</div>
-            <div class="cl-val">hirushajayasundara03@gmail.com</div>
-          </div>
-        </a>
-        <a href="https://linkedin.com/in/hirushajayasundara-676a8a249" target="_blank" class="contact-link">
-          <div class="contact-icon"><i class="fa-brands fa-linkedin"></i></div>
-          <div>
-            <div class="cl-label">LinkedIn</div>
-            <div class="cl-val">hirushajayasundara-676a8a249</div>
-          </div>
-        </a>
-        <a href="https://github.com/Hiru-stack" target="_blank" class="contact-link">
-          <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
-          <div>
-            <div class="cl-label">GitHub</div>
-            <div class="cl-val">github.com/Hiru-stack</div>
-          </div>
-        </a>
-        <a href="tel:+94760675755" class="contact-link">
-          <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
-          <div>
-            <div class="cl-label">Phone</div>
-            <div class="cl-val">+94 76 06 75 755</div>
-          </div>
-        </a>
-      </div>
-    </div>
-    <form action="https://formsubmit.co/hirushajayasundara03@gmail.com" method="POST" class="contact-form">
-      <!-- Formsubmit Configuration -->
-      <input type="hidden" name="_subject" value="New Contact from Portfolio!">
-      <input type="text" name="_honey" style="display:none">
-      <input type="hidden" name="_captcha" value="false">
+                    <!-- Panel 3: Soft Skills -->
+                    <div class="skills-panel" id="cat-soft">
+                        <div class="skills-tag-grid large-tags">
+                            <div class="skill-tag-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                <span>Leadership</span>
+                            </div>
+                            <div class="skill-tag-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                <span>Teamwork</span>
+                            </div>
+                            <div class="skill-tag-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                <span>Communication</span>
+                            </div>
+                            <div class="skill-tag-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                <span>Problem Solving</span>
+                            </div>
+                            <div class="skill-tag-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                <span>Event Coordination</span>
+                            </div>
+                            <div class="skill-tag-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                <span>Mentoring</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <div class="form-row">
-        <label>Your Name</label>
-        <input type="text" name="name" placeholder="Jane Doe" required/>
-      </div>
-      <div class="form-row">
-        <label>Email Address</label>
-        <input type="email" name="email" placeholder="jane@company.com" required/>
-      </div>
-      <div class="form-row">
-        <label>Message</label>
-        <textarea name="message" rows="5" placeholder="Tell me about the opportunity..." required></textarea>
-      </div>
-      <button type="submit" class="btn-primary" style="width:100%; justify-content:center; border:none; cursor:pointer; font-family: inherit;">
-        <i class="fa-solid fa-paper-plane"></i> Send Message
-      </button>
-    </form>
-  </div>
-</section>
+    <!-- ===================== PORTFOLIO SHOWCASE ===================== -->
+    <section class="portfolio section" id="portfolio">
+        <div class="container portfolio-header">
+            <div class="section-label">MY WORK</div>
+            <h2 class="section-title">Academic & <span class="gradient-text">Research Projects</span></h2>
+        </div>
+        <div class="carousel-container">
+            <button class="carousel-btn carousel-prev" id="carousel-prev" aria-label="Previous project">&#8592;</button>
+            <div class="carousel-track-wrap">
+                <div class="carousel-track" id="carousel-track">
 
-<footer>
-  <p>Designed & built by Hirusha Jayasundara · 2026</p>
-</footer>
+                    <div class="project-card" id="proj-1">
+                        <div class="project-img-wrap">
+                            <div class="project-placeholder proj-purple">
+                                <div class="proj-visual">
+                                    <div class="pv-header"><div class="pv-dot r"></div><div class="pv-dot y"></div><div class="pv-dot g"></div></div>
+                                    <div class="pv-chart">
+                                        <div class="pv-bar" style="height:60%"></div>
+                                        <div class="pv-bar" style="height:85%"></div>
+                                        <div class="pv-bar" style="height:45%"></div>
+                                        <div class="pv-bar" style="height:95%"></div>
+                                    </div>
+                                    <div class="pv-lines">
+                                        <div class="pv-line" style="width:75%"></div>
+                                        <div class="pv-line" style="width:55%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags"><span class="ptag">Python</span><span class="ptag">PostgreSQL</span><span class="ptag">Streamlit</span></div>
+                            <h3 class="project-name">University Data Warehouse System</h3>
+                            <p class="project-desc">Designed a Star Schema data warehouse for university analytics. Built automated ETL pipelines and integrated interactive Streamlit dashboards.</p>
+                            <a href="https://github.com/Hiru-stack/Hiru-stack" target="_blank" class="project-link" id="proj-1-link">View Repository →</a>
+                        </div>
+                    </div>
 
-<script>
-const langColors = {
-  Python: '#3572A5', JavaScript: '#f1e05a', HTML: '#e34c26',
-  CSS: '#563d7c', TypeScript: '#2b7489', Jupyter: '#DA5B0B',
-  Shell: '#89e051', default: '#8b89b0'
-};
+                    <div class="project-card" id="proj-2">
+                        <div class="project-img-wrap">
+                            <div class="project-placeholder proj-orange">
+                                <div class="proj-visual">
+                                    <div class="pv-header"><div class="pv-dot r"></div><div class="pv-dot y"></div><div class="pv-dot g"></div></div>
+                                    <div class="pv-shield">
+                                        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,107,107,0.7)" stroke-width="1"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                    </div>
+                                    <div class="pv-lines">
+                                        <div class="pv-line orange" style="width:65%"></div>
+                                        <div class="pv-line orange" style="width:45%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags"><span class="ptag ptag--orange">Python</span><span class="ptag ptag--orange">Pandas</span><span class="ptag ptag--orange">Matplotlib</span></div>
+                            <h3 class="project-name">Formula 1 Performance Analytics</h3>
+                            <p class="project-desc">Analyzed F1 race data using FastF1, developing custom machine learning models for race outcome predictions and driver lap analysis dashboards.</p>
+                            <a href="https://github.com/Hiru-stack/Hiru-stack" target="_blank" class="project-link project-link--orange" id="proj-2-link">View Repository →</a>
+                        </div>
+                    </div>
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-</script>
+                    <div class="project-card" id="proj-3">
+                        <div class="project-img-wrap">
+                            <div class="project-placeholder proj-blue">
+                                <div class="proj-visual">
+                                    <div class="pv-header"><div class="pv-dot r"></div><div class="pv-dot y"></div><div class="pv-dot g"></div></div>
+                                    <div class="pv-cloud">
+                                        <svg width="52" height="36" viewBox="0 0 24 16" fill="none" stroke="rgba(56,189,248,0.7)" stroke-width="1"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                                    </div>
+                                    <div class="pv-lines">
+                                        <div class="pv-line blue" style="width:70%"></div>
+                                        <div class="pv-line blue" style="width:50%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags"><span class="ptag ptag--blue">Flask</span><span class="ptag ptag--blue">JavaScript</span><span class="ptag ptag--blue">SQLite</span></div>
+                            <h3 class="project-name">Payonic — Campus FinTech Ecosystem</h3>
+                            <p class="project-desc">Developed a digital payment ecosystem featuring QR code payments, user wallet functionalities, and transaction reporting metrics.</p>
+                            <a href="https://github.com/Hiru-stack/Hiru-stack" target="_blank" class="project-link project-link--blue" id="proj-3-link">View Repository →</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card" id="proj-4">
+                        <div class="project-img-wrap">
+                            <div class="project-placeholder proj-green">
+                                <div class="proj-visual">
+                                    <div class="pv-header"><div class="pv-dot r"></div><div class="pv-dot y"></div><div class="pv-dot g"></div></div>
+                                    <div class="pv-pipeline">
+                                        <div class="pv-pipe-step"></div>
+                                        <div class="pv-pipe-arrow">→</div>
+                                        <div class="pv-pipe-step"></div>
+                                    </div>
+                                    <div class="pv-lines">
+                                        <div class="pv-line green" style="width:80%"></div>
+                                        <div class="pv-line green" style="width:60%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags"><span class="ptag ptag--green">ML</span><span class="ptag ptag--green">Python</span><span class="ptag ptag--green">Streamlit</span></div>
+                            <h3 class="project-name">SmartLoan AI — Risk Prediction</h3>
+                            <p class="project-desc">Ongoing predictive modeling research developing machine learning approaches for credit risk assessment and financial analytics.</p>
+                            <a href="https://github.com/Hiru-stack/Hiru-stack" target="_blank" class="project-link project-link--green" id="proj-4-link">View Repository →</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card" id="proj-5">
+                        <div class="project-img-wrap">
+                            <div class="project-placeholder proj-orange">
+                                <div class="proj-visual">
+                                    <div class="pv-header"><div class="pv-dot r"></div><div class="pv-dot y"></div><div class="pv-dot g"></div></div>
+                                    <div class="pv-lines" style="margin-top:20px;">
+                                        <div class="pv-line orange" style="width:75%"></div>
+                                        <div class="pv-line orange" style="width:55%"></div>
+                                        <div class="pv-line orange" style="width:90%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags"><span class="ptag ptag--orange">Python</span><span class="ptag ptag--orange">BeautifulSoup</span></div>
+                            <h3 class="project-name">Laptop Price Web Scraper</h3>
+                            <p class="project-desc">A Python scraper using BeautifulSoup to extract laptop prices, stored efficiently with Pandas.</p>
+                            <a href="https://github.com/Hiru-stack/Laptop-Price-Web-Scraper" target="_blank" class="project-link project-link--orange" id="proj-5-link">View Repository →</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card" id="proj-6">
+                        <div class="project-img-wrap">
+                            <div class="project-placeholder proj-purple">
+                                <div class="proj-visual">
+                                    <div class="pv-header"><div class="pv-dot r"></div><div class="pv-dot y"></div><div class="pv-dot g"></div></div>
+                                    <div class="pv-chart" style="margin-top:20px; align-items:flex-end; gap:8px;">
+                                        <div class="pv-bar" style="height:30%; width:20px;"></div>
+                                        <div class="pv-bar" style="height:50%; width:20px;"></div>
+                                        <div class="pv-bar" style="height:70%; width:20px;"></div>
+                                        <div class="pv-bar" style="height:90%; width:20px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags"><span class="ptag ptag--purple">Python</span><span class="ptag ptag--purple">Pandas</span></div>
+                            <h3 class="project-name">CSV Data Cleaning Pipeline</h3>
+                            <p class="project-desc">An automated data cleaning pipeline designed to process and normalize raw CSV datasets effectively.</p>
+                            <a href="https://github.com/Hiru-stack/CSV-Data-Cleaning-Pipeline" target="_blank" class="project-link project-link--purple" id="proj-6-link">View Repository →</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card" id="proj-7">
+                        <div class="project-img-wrap">
+                            <div class="project-placeholder proj-blue">
+                                <div class="proj-visual">
+                                    <div class="pv-header"><div class="pv-dot r"></div><div class="pv-dot y"></div><div class="pv-dot g"></div></div>
+                                    <div class="pv-cloud">
+                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(56,189,248,0.7)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 11.5A4.5 4.5 0 0 1 12.5 7"/><path d="M8 15.5A7.5 7.5 0 0 1 15.5 8"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags"><span class="ptag ptag--blue">Python</span><span class="ptag ptag--blue">Analysis</span></div>
+                            <h3 class="project-name">Spotify Data Analysis</h3>
+                            <p class="project-desc">Exploratory data analysis project uncovering music trends and insights from Spotify datasets.</p>
+                            <a href="https://github.com/Hiru-stack/SpotifyProject-DataAnalyze" target="_blank" class="project-link project-link--blue" id="proj-7-link">View Repository →</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card" id="proj-8">
+                        <div class="project-img-wrap">
+                            <div class="project-placeholder proj-green">
+                                <div class="proj-visual">
+                                    <div class="pv-header"><div class="pv-dot r"></div><div class="pv-dot y"></div><div class="pv-dot g"></div></div>
+                                    <div class="pv-pipeline">
+                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(74,222,128,0.7)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags"><span class="ptag ptag--green">Python</span><span class="ptag ptag--green">ML</span></div>
+                            <h3 class="project-name">Linear Regression Project</h3>
+                            <p class="project-desc">Implemented linear regression models to analyze datasets and build predictive machine learning capabilities.</p>
+                            <a href="https://github.com/Hiru-stack/Linear-Regression-Project" target="_blank" class="project-link project-link--green" id="proj-8-link">View Repository →</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button class="carousel-btn carousel-next" id="carousel-next" aria-label="Next project">&#8594;</button>
+        </div>
+        <div class="carousel-dots" id="carousel-dots"></div>
+        <div class="portfolio-cta">
+            <a href="https://github.com/Hiru-stack/Hiru-stack" target="_blank" class="btn-gradient btn-wide" id="view-more-btn">View All Repositories</a>
+        </div>
+    </section>
+
+    <!-- ===================== ONGOING RESEARCH ===================== -->
+    <section class="research section" id="research">
+        <div class="research-bg-glow"></div>
+        <div class="container">
+            <div class="section-label">ACADEMIC RESEARCH</div>
+            <h2 class="section-title">Ongoing <span class="gradient-text">Scientific Exploration</span></h2>
+            
+            <div class="research-card">
+                <div class="research-card-left">
+                    <div class="research-status">
+                        <span class="status-pulse"></span>
+                        Targeting ICTer Conference 2026
+                    </div>
+                    <h3 class="research-paper-title">SmartLoan AI: Advanced Machine Learning Models for Credit Risk & Loan Approval</h3>
+                    <p class="research-abstract">
+                        <strong>Overview:</strong> Currently expanding the SmartLoan AI project into formal academic research, evaluating machine learning prediction models that analyze loan approval probabilities based on user financial details.
+                    </p>
+                    <div class="research-focus-areas">
+                        <h4>Key Focus Areas:</h4>
+                        <ul class="focus-list">
+                            <li>
+                                <span class="focus-number">01</span>
+                                <div class="focus-text">
+                                    <strong>Data Preprocessing:</strong> Data collection & preprocessing methodologies. Custom feature engineering for highly skewed financial profiles.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="focus-number">02</span>
+                                <div class="focus-text">
+                                    <strong>Exploratory Analysis (EDA):</strong> Exploratory Data Analysis (EDA) on financial datasets to identify core correlation parameters.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="focus-number">03</span>
+                                <div class="focus-text">
+                                    <strong>Model Benchmarking:</strong> Building and benchmarking loan prediction models (Random Forests, XGBoost, etc.).
+                                </div>
+                            </li>
+                            <li>
+                                <span class="focus-number">04</span>
+                                <div class="focus-text">
+                                    <strong>Prediction Accuracy:</strong> Tuning hyperparameters to maximize AI-powered loan approval prediction accuracy.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="research-card-right">
+                    <div class="research-goal-box">
+                        <div class="goal-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="goal-content">
+                            <h4>Strategic Objective</h4>
+                            <p>To strengthen the understanding of how intelligent systems support financial decision-making, with the ultimate objective of publishing the findings at the upcoming ICTer Conference.</p>
+                        </div>
+                    </div>
+                    <div class="research-tags">
+                        <span class="rtag">Machine Learning</span>
+                        <span class="rtag">Data Analytics</span>
+                        <span class="rtag">Predictive Modeling</span>
+                    </div>
+                    <div class="research-stats-mini">
+                        <div class="rmini-stat">
+                            <span class="rmini-val">In Progress</span>
+                            <span class="rmini-lbl">Status</span>
+                        </div>
+                        <div class="rmini-stat">
+                            <span class="rmini-val">Python / ML</span>
+                            <span class="rmini-lbl">Research Stack</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== VOLUNTEER & ENGAGEMENT ===================== -->
+    <section class="volunteer section" id="volunteer">
+        <div class="container">
+            <div class="section-label">COMMUNITY ENGAGEMENT</div>
+            <h2 class="section-title">Volunteer & <span class="gradient-text">Professional Experience</span></h2>
+            
+            <div class="volunteer-grid">
+                
+                <!-- Card 1: Sasnaka Sansada -->
+                <div class="volunteer-card" id="vol-1">
+                    <div class="vol-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div class="vol-content">
+                        <span class="vol-duration">1 year 10 months</span>
+                        <h3 class="vol-org">Sasnaka Sansada Foundation</h3>
+                        <span class="vol-role">Multi-role Volunteer</span>
+                        <p class="vol-desc">Served as a Mentor at the Nipayumani First Commit Program, Ambassador in FOW, HR Team Member for the Nuwara Eliya District, and Translation Team Member at ICT EduTalk.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: IEEE Innovation Nation -->
+                <div class="volunteer-card" id="vol-2">
+                    <div class="vol-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <div class="vol-content">
+                        <span class="vol-duration">Feb 2026 – Present</span>
+                        <h3 class="vol-org">IEEE Innovation Nation Sri Lanka</h3>
+                        <span class="vol-role">Project Coordinator – Secretary Team</span>
+                        <p class="vol-desc">Coordinating project workflows, managing communications, and supporting the secretariat for one of Sri Lanka's leading IEEE innovation initiatives.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3: IEEE WIE -->
+                <div class="volunteer-card" id="vol-3">
+                    <div class="vol-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div class="vol-content">
+                        <span class="vol-duration">Oct 2025 – Present</span>
+                        <h3 class="vol-org">IEEE WIE Affinity Group, UoV</h3>
+                        <span class="vol-role">Chairwoman & Active Member</span>
+                        <p class="vol-desc">Leading the Women in Engineering affinity group, organizing technical/educational events, mentoring junior members, and promoting women's participation in STEM.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4: Leo Club -->
+                <div class="volunteer-card" id="vol-4">
+                    <div class="vol-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <div class="vol-content">
+                        <span class="vol-duration">Jun 2025 – Present</span>
+                        <h3 class="vol-org">Leo Club of University of Vavuniya</h3>
+                        <span class="vol-role">Secretary & Community Leader</span>
+                        <p class="vol-desc">Managing club correspondence, keeping official records, coordinating community service projects, and leading student engagement and social impact initiatives.</p>
+                    </div>
+                </div>
+
+                <!-- Card 5: IEEE CS SYP -->
+                <div class="volunteer-card" id="vol-5">
+                    <div class="vol-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div class="vol-content">
+                        <span class="vol-duration">Oct 2025 – Jan 2026</span>
+                        <h3 class="vol-org">IEEE Computer Society SYP</h3>
+                        <span class="vol-role">Industry Committee Engagement Lead</span>
+                        <p class="vol-desc">Facilitated industry-academia connections and coordinated engagement activities between student members and technology industry professionals.</p>
+                    </div>
+                </div>
+
+                <!-- Card 6: ADBI -->
+                <div class="volunteer-card" id="vol-6">
+                    <div class="vol-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <div class="vol-content">
+                        <span class="vol-duration">Jul 2022 – Sep 2022</span>
+                        <h3 class="vol-org">Asian Development Bank Institute (ADBI)</h3>
+                        <span class="vol-role">Programme Participant</span>
+                        <p class="vol-desc">Completed a Certificate in Financial Globalization, Capital Flows, and the Global Financial Cycle — broadening knowledge of international economics and global financial systems.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SERVICES GRID ===================== -->
+    <section class="services section" id="services">
+        <div class="container">
+            <div class="section-label">SPECIALTIES</div>
+            <h2 class="section-title">Core <span class="gradient-text">Deliverables</span></h2>
+            <div class="services-grid">
+
+                <div class="service-item" id="svc-1">
+                    <div class="svc-icon svc-icon--blue">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                    </div>
+                    <h3 class="svc-title">Data Science & Analytics</h3>
+                    <p class="svc-desc">Designing machine learning classification, regression models, and data exploration strategies for business intelligence applications.</p>
+                    <ul class="svc-list">
+                        <li>Predictive modeling (Scikit-learn)</li>
+                        <li>Feature engineering & data cleaning</li>
+                        <li>Exploratory data analysis</li>
+                    </ul>
+                    <a href="#contact" class="svc-link svc-link--blue" id="svc-1-link">Collaborate →</a>
+                </div>
+
+                <div class="service-item" id="svc-2">
+                    <div class="svc-icon svc-icon--purple">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <h3 class="svc-title">ETL & Database Design</h3>
+                    <p class="svc-desc">Structuring star schema warehouses, executing database schema migration, and building custom pipeline scripts.</p>
+                    <ul class="svc-list">
+                        <li>PostgreSQL & SQLite optimization</li>
+                        <li>Star Schema & Snowflake architectures</li>
+                        <li>Automated pipeline orchestration</li>
+                    </ul>
+                    <a href="#contact" class="svc-link svc-link--purple" id="svc-2-link">Collaborate →</a>
+                </div>
+
+                <div class="service-item" id="svc-3">
+                    <div class="svc-icon svc-icon--orange">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3 class="svc-title">Cybersecurity Audits</h3>
+                    <p class="svc-desc">Applying fundamental scanning, testing, and hardening workflows derived from rigorous ethical hacking studies.</p>
+                    <ul class="svc-list">
+                        <li>Vulnerability identification</li>
+                        <li>Network asset hardening practices</li>
+                        <li>Basic compliance checklists</li>
+                    </ul>
+                    <a href="#contact" class="svc-link svc-link--orange" id="svc-3-link">Collaborate →</a>
+                </div>
+
+                <div class="service-item" id="svc-4">
+                    <div class="svc-icon svc-icon--green">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    </div>
+                    <h3 class="svc-title">Dashboard & UI Engineering</h3>
+                    <p class="svc-desc">Developing user-friendly Streamlit tools, Flask interfaces, and visual report decks using Power BI or Excel.</p>
+                    <ul class="svc-list">
+                        <li>Interactive data visualizations</li>
+                        <li>Lightweight web architecture</li>
+                        <li>Business Analytics reporting</li>
+                    </ul>
+                    <a href="#contact" class="svc-link svc-link--green" id="svc-4-link">Collaborate →</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== ACHIEVEMENTS & RECOGNITIONS ===================== -->
+    <section class="achievements-section section" id="testimonials">
+        <div class="container">
+            <div class="section-label">RECOGNITIONS</div>
+            <h2 class="section-title">Achievements & <span class="gradient-text">Recognitions</span></h2>
+
+            <!-- Achievement Cards Row -->
+            <div class="achv-grid">
+
+                <!-- Card 1: Outstanding Secretary -->
+                <div class="achv-card" id="achv-1">
+                    <div class="achv-glow"></div>
+                    <div class="achv-card-inner">
+                        <div class="achv-icon-row">
+                            <div class="achv-icon-wrap">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2L14.09 8.26L20.18 8.64L15.54 12.74L17.12 19.36L12 15.77L6.88 19.36L8.46 12.74L3.82 8.64L9.91 8.26L12 2Z" fill="url(#starGrad1)" stroke="url(#starGrad1)" stroke-width="0.5"/>
+                                    <defs><linearGradient id="starGrad1" x1="3" y1="2" x2="21" y2="20"><stop stop-color="#8A2BE2"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs>
+                                </svg>
+                            </div>
+                            <span class="achv-badge">Leo Club</span>
+                        </div>
+                        <h3 class="achv-title">Outstanding Secretary</h3>
+                        <p class="achv-desc">Recognized for exceptional administrative leadership at the Leo Club of University of Vavuniya.</p>
+                        <ul class="achv-list">
+                            <li>
+                                <span class="achv-bullet"></span>
+                                <span>Most Outstanding <strong>Club Secretary</strong></span>
+                            </li>
+                            <li>
+                                <span class="achv-bullet"></span>
+                                <span>Most Outstanding <strong>Club Administration</strong></span>
+                            </li>
+                        </ul>
+                        <div class="achv-footer">
+                            <div class="achv-org-icon" style="background: linear-gradient(135deg, #8A2BE2, #FF6B6B);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <div class="achv-org-info">
+                                <span class="achv-org-name">Leo Club of UoV</span>
+                                <span class="achv-org-role">Administration & Secretary</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Key Project Awards -->
+                <div class="achv-card" id="achv-2">
+                    <div class="achv-glow"></div>
+                    <div class="achv-card-inner">
+                        <div class="achv-icon-row">
+                            <div class="achv-icon-wrap">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2L14.09 8.26L20.18 8.64L15.54 12.74L17.12 19.36L12 15.77L6.88 19.36L8.46 12.74L3.82 8.64L9.91 8.26L12 2Z" fill="url(#starGrad2)" stroke="url(#starGrad2)" stroke-width="0.5"/>
+                                    <defs><linearGradient id="starGrad2" x1="3" y1="2" x2="21" y2="20"><stop stop-color="#8A2BE2"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs>
+                                </svg>
+                            </div>
+                            <span class="achv-badge achv-badge--blue">Projects</span>
+                        </div>
+                        <h3 class="achv-title">Key Project Awards</h3>
+                        <p class="achv-desc">Recognized for leading impactful university community projects across multiple categories.</p>
+                        <ul class="achv-list">
+                            <li>
+                                <span class="achv-bullet achv-bullet--blue"></span>
+                                <span>Most Outstanding Project — <strong>RElive Project</strong><br><small>Mental Health & Wellbeing Category</small></span>
+                            </li>
+                            <li>
+                                <span class="achv-bullet achv-bullet--blue"></span>
+                                <span>Most Outstanding Project — <strong>Harmony Fest</strong><br><small>Peace, Religious & Cultural Category</small></span>
+                            </li>
+                        </ul>
+                        <div class="achv-footer">
+                            <div class="achv-org-icon" style="background: linear-gradient(135deg, #38BDF8, #8A2BE2);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            </div>
+                            <div class="achv-org-info">
+                                <span class="achv-org-name">University Projects</span>
+                                <span class="achv-org-role">Lead Coordinator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Referee Card -->
+            <div class="referee-card" id="referee-1">
+                <div class="referee-inner">
+                    <div class="referee-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <div class="referee-content">
+                        <span class="referee-label">Professional Reference</span>
+                        <h4 class="referee-name">Ms. R. Yasotha</h4>
+                        <p class="referee-role">Senior Lecturer · Department of Physical Science<br>Faculty of Applied Science · University of Vavuniya, Sri Lanka</p>
+                    </div>
+                    <a href="mailto:yasotha@vau.ac.lk" class="referee-contact" id="referee-email-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        yasotha@vau.ac.lk
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer" id="contact">
+        <div class="footer-top">
+            <div class="container footer-grid">
+ 
+                <div class="footer-brand">
+                    <a href="#home" class="footer-logo">HJ<span class="accent-dot">.</span></a>
+                    <p class="footer-tagline">Building data systems and AI solutions for real-world impact.</p>
+                    <div class="footer-socials">
+                        <a href="https://linkedin.com/in/hirusha-jayasundara-676a8a249" target="_blank" rel="noopener" class="fsocial" id="footer-linkedin" aria-label="LinkedIn">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="https://github.com/Hiru-stack/Hiru-stack" target="_blank" rel="noopener" class="fsocial" id="footer-github" aria-label="GitHub">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        </a>
+                        <a href="mailto:hirushajayasundara03@gmail.com" class="fsocial" id="footer-email" aria-label="Email">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </a>
+                        <a href="https://linktr.ee/Hirusha_Jayasundara" target="_blank" rel="noopener" class="fsocial" id="footer-linktree" aria-label="Linktree">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="m13.511 5.853 4.005-4.117 2.325 1.517-3.13 3.222h5.289v2.774h-6.273l3.825 3.931-1.937 1.992-5.115-5.258v7.91h-3.001v-7.91l-5.115 5.258-1.937-1.992 3.825-3.931H.001V6.479h5.289L2.16 3.257 4.485 1.74l4.005 4.113V0h3.022v5.853zM10.5 24h3v-3h-3v3z"/></svg>
+                        </a>
+                    </div>
+                </div>
+ 
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="flink" id="flink-home">Home</a></li>
+                        <li><a href="#about" class="flink" id="flink-about">About Me</a></li>
+                        <li><a href="#experience" class="flink" id="flink-exp">Experience</a></li>
+                        <li><a href="#portfolio" class="flink" id="flink-port">Projects</a></li>
+                        <li><a href="#research" class="flink" id="flink-research">Research</a></li>
+                        <li><a href="#volunteer" class="flink" id="flink-volunteer">Volunteer</a></li>
+                        <li><a href="#services" class="flink" id="flink-svc">Services</a></li>
+                    </ul>
+                </div>
+ 
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Social Media</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://linkedin.com/in/hirusha-jayasundara-676a8a249" target="_blank" rel="noopener" class="flink" id="flink-linkedin">LinkedIn</a></li>
+                        <li><a href="https://github.com/Hiru-stack/Hiru-stack" target="_blank" rel="noopener" class="flink" id="flink-github">GitHub</a></li>
+                        <li><a href="https://linktr.ee/Hirusha_Jayasundara" target="_blank" rel="noopener" class="flink" id="flink-linktree">Linktree</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4 class="footer-col-title">Stay in the Loop</h4>
+                    <p class="newsletter-desc">Subscribe to get updates on my research progress, academic publications, and database pipeline designs.</p>
+                    <form class="newsletter-form" id="newsletter-form" novalidate>
+                        <div class="newsletter-input-wrap" id="newsletter-input-wrap">
+                            <input type="email" placeholder="your@email.com" class="newsletter-input" id="newsletter-email" required aria-label="Email address for newsletter">
+                            <button type="submit" class="newsletter-btn" id="newsletter-submit">Subscribe</button>
+                        </div>
+                        <p class="newsletter-consent">No spam. Unsubscribe anytime.</p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <span class="copyright">© 2026 Hirusha Jayasundara. All rights reserved.</span>
+                <div class="footer-bottom-links">
+                    <a href="#" class="flink-bottom" id="flink-privacy">Privacy Policy</a>
+                    <a href="#" class="flink-bottom" id="flink-terms">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
